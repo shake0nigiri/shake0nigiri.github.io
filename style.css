@@ -431,7 +431,7 @@ h1 {
 
 
 /* =========================
-   COMING SOON
+   COMING SOON BUTTONS
 ========================= */
 
 .coming-soon-list {
@@ -447,31 +447,103 @@ h1 {
 }
 
 .coming-soon-button {
-  width: 100%;
-
-  min-height: 72px;
-
-  padding: 10px 28px;
-
   display: flex;
 
   align-items: center;
 
   justify-content: center;
 
+  width: 100%;
+
+  min-height: 72px;
+
+  padding: 10px 28px;
+
   border: 2px solid #171717;
 
-  background: #e5e2d9;
+  background: #fffdf5;
 
-  color: #777;
+  color: #171717;
 
-  font-size: 18px;
+  font-family:
+    "Brush Script MT",
+    "Segoe Script",
+    "Lucida Handwriting",
+    cursive;
 
-  font-weight: 700;
+  font-size: 24px;
 
-  letter-spacing: 0.16em;
+  font-weight: 600;
 
-  cursor: default;
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.16s ease,
+    background 0.16s ease,
+    color 0.16s ease;
+}
+
+.coming-soon-button:hover {
+  transform: translateX(8px);
+
+  background: #171717;
+
+  color: #fffdf5;
+}
+
+
+/* =========================
+   COMING SOON POPUP
+========================= */
+
+.coming-soon-popup {
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 30px;
+
+  z-index: 9999;
+
+  transform:
+    translate(-50%, 150px);
+
+  opacity: 0;
+
+  padding: 18px 34px;
+
+  border: 2px solid #171717;
+
+  background: #fffdf5;
+
+  color: #171717;
+
+  font-family:
+    "Brush Script MT",
+    "Segoe Script",
+    "Lucida Handwriting",
+    cursive;
+
+  font-size: 26px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+
+  pointer-events: none;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.coming-soon-popup.show {
+  transform:
+    translate(-50%, 0);
+
+  opacity: 1;
 }
 
 
@@ -563,7 +635,16 @@ footer {
     font-size: 68px;
   }
 
-  .url-button {
+  .url-button,
+  .coming-soon-button {
     width: 100%;
+  }
+
+  .coming-soon-popup {
+    width: calc(100% - 40px);
+
+    text-align: center;
+
+    font-size: 22px;
   }
 }
