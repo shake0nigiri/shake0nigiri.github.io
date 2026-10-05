@@ -191,16 +191,6 @@ h1 {
   font-weight: 700;
 }
 
-.description {
-  max-width: 520px;
-
-  margin: 0;
-
-  line-height: 1.9;
-
-  font-size: 14px;
-}
-
 
 /* =========================
    VISUAL
@@ -437,6 +427,51 @@ h1 {
   font-weight: 600;
 
   letter-spacing: 0.02em;
+}
+
+
+/* =========================
+   COMING SOON
+========================= */
+
+.coming-soon-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  max-width: 760px;
+
+  margin-top: 16px;
+}
+
+.coming-soon-button {
+  width: 100%;
+
+  min-height: 72px;
+
+  padding: 10px 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 2px solid #171717;
+
+  background: #e5e2d9;
+
+  color: #777;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  cursor: default;
 }
 
 
