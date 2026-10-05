@@ -393,9 +393,12 @@ h1 {
 
   background: #fffdf5;
 
+  color: #171717;
+
   transition:
     transform 0.16s ease,
-    background 0.16s ease;
+    background 0.16s ease,
+    color 0.16s ease;
 }
 
 .url-button:hover {
@@ -434,38 +437,8 @@ h1 {
    COMING SOON BUTTONS
 ========================= */
 
-.coming-soon-list {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 16px;
-
-  max-width: 760px;
-
-  margin-top: 16px;
-}
-
 .coming-soon-button {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: flex-start;
-
-  gap: 18px;
-
-  width: 100%;
-
-  min-height: 72px;
-
-  padding: 10px 28px;
-
-  border: 2px solid #171717;
-
-  background: #fffdf5;
-
-  color: #171717;
+  appearance: none;
 
   font-family:
     "Brush Script MT",
@@ -473,34 +446,10 @@ h1 {
     "Lucida Handwriting",
     cursive;
 
-  font-size: 24px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.02em;
-
   cursor: pointer;
-
-  transition:
-    transform 0.16s ease,
-    background 0.16s ease,
-    color 0.16s ease;
 }
 
-.coming-soon-button:hover {
-  transform: translateX(8px);
-
-  background: #171717;
-
-  color: #fffdf5;
-}
-
-
-/* SNSアイコン分の空白 */
-
-.coming-soon-button::before {
-  content: "";
-
+.coming-soon-icon-space {
   display: block;
 
   width: 48px;
@@ -518,15 +467,9 @@ h1 {
   position: fixed;
 
   left: 50%;
-
   bottom: 30px;
 
   z-index: 9999;
-
-  transform:
-    translate(-50%, 150px);
-
-  opacity: 0;
 
   padding: 18px 34px;
 
@@ -550,16 +493,21 @@ h1 {
 
   pointer-events: none;
 
+  opacity: 0;
+
+  transform:
+    translate(-50%, 150px);
+
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.3s ease;
 }
 
 .coming-soon-popup.show {
+  opacity: 1;
+
   transform:
     translate(-50%, 0);
-
-  opacity: 1;
 }
 
 
@@ -651,8 +599,7 @@ footer {
     font-size: 68px;
   }
 
-  .url-button,
-  .coming-soon-button {
+  .url-button {
     width: 100%;
   }
 
