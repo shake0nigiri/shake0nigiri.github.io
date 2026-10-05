@@ -15,9 +15,9 @@ comingSoonButtons.forEach((button) => {
     comingSoonPopup.classList.remove("show");
 
     /*
-      アニメーションを一度リセットして
-      もう一度下から出す
-    */
+     * アニメーションをリセットして
+     * 毎回下から出てくるようにする
+     */
     void comingSoonPopup.offsetWidth;
 
     comingSoonPopup.classList.add("show");
