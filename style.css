@@ -1,7 +1,3 @@
-/* =========================
-   BASE
-========================= */
-
 * {
   box-sizing: border-box;
 }
@@ -13,12 +9,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-
   overflow-x: hidden;
-
   background: #f4f1e8;
   color: #171717;
-
   font-family:
     "Trebuchet MS",
     "Yu Gothic",
@@ -31,23 +24,53 @@ a {
   text-decoration: none;
 }
 
-
-/* =========================
-   PAGE
-========================= */
+button {
+  font: inherit;
+}
 
 .page {
   position: relative;
-
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
 }
 
 
 /* =========================
-   DECORATIVE SHAPES
+   PAGE TRANSITION
+========================= */
+
+#pageTransition {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  background: #171717;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transform: scaleY(0);
+
+  transform-origin: bottom;
+
+  transition:
+    transform 0.65s cubic-bezier(0.77, 0, 0.18, 1),
+    opacity 0.35s ease;
+}
+
+#pageTransition.is-leaving {
+  opacity: 1;
+
+  transform: scaleY(1);
+
+  transform-origin: bottom;
+}
+
+
+/* =========================
+   BACKGROUND SHAPES
 ========================= */
 
 .shape {
@@ -108,7 +131,48 @@ header {
 
   display: flex;
 
-  justify-content: flex-end;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.site-logo {
+  appearance: none;
+
+  border: 0;
+
+  padding: 0;
+
+  background: transparent;
+
+  color: #171717;
+
+  cursor: pointer;
+
+  font-family:
+    "Trebuchet MS",
+    "Yu Gothic",
+    sans-serif;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.site-logo:hover {
+  transform: translateX(5px);
+
+  opacity: 0.65;
+}
+
+.site-logo:active {
+  transform: scale(0.96);
 }
 
 .top-label {
@@ -145,11 +209,6 @@ main {
 
   align-items: center;
 }
-
-
-/* =========================
-   INTRO
-========================= */
 
 .intro {
   display: flex;
@@ -266,13 +325,22 @@ h1 {
 }
 
 .visual-mark {
-  font-size: clamp(50px, 8vw, 95px);
+  font-family:
+    "HGP行書体",
+    "HGS行書体",
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    serif;
+
+  font-size: clamp(58px, 8vw, 105px);
 
   line-height: 0.9;
 
   font-weight: 900;
 
-  letter-spacing: -0.08em;
+  letter-spacing: 0.08em;
+
+  white-space: nowrap;
 }
 
 .visual-small {
@@ -361,7 +429,7 @@ h1 {
 
 
 /* =========================
-   SNS BUTTONS
+   URL BUTTONS
 ========================= */
 
 .url-list {
@@ -512,6 +580,94 @@ h1 {
 
 
 /* =========================
+   BACK TO TOP
+========================= */
+
+.back-to-top {
+  position: fixed;
+
+  right: 30px;
+  bottom: 30px;
+
+  z-index: 5000;
+
+  width: 120px;
+  height: 54px;
+
+  padding: 0 18px;
+
+  border: 2px solid #171717;
+
+  background: #fffdf5;
+
+  color: #171717;
+
+  cursor: pointer;
+
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translateY(30px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.35s ease,
+    background 0.16s ease,
+    color 0.16s ease;
+}
+
+.back-to-top.show {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: #171717;
+
+  color: #fffdf5;
+
+  transform: translateY(-5px);
+}
+
+.back-to-top-arrow {
+  font-size: 22px;
+
+  line-height: 1;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-weight: 700;
+}
+
+.back-to-top-text {
+  font-size: 13px;
+
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+
+  font-weight: 900;
+}
+
+
+/* =========================
    FOOTER
 ========================= */
 
@@ -579,6 +735,22 @@ footer {
     width: 150px;
     height: 150px;
   }
+
+  .back-to-top {
+    right: 20px;
+    bottom: 20px;
+
+    width: 110px;
+    height: 50px;
+  }
+
+  .back-to-top-arrow {
+    font-size: 20px;
+  }
+
+  .back-to-top-text {
+    font-size: 12px;
+  }
 }
 
 
@@ -609,5 +781,29 @@ footer {
     text-align: center;
 
     font-size: 22px;
+  }
+
+  .back-to-top {
+    right: 14px;
+    bottom: 14px;
+
+    width: 100px;
+    height: 48px;
+  }
+
+  .back-to-top-arrow {
+    font-size: 19px;
+  }
+
+  .back-to-top-text {
+    font-size: 11px;
+  }
+
+  .site-logo {
+    font-size: 15px;
+  }
+
+  .top-label {
+    font-size: 10px;
   }
 }
