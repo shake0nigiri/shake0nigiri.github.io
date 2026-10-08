@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DIARY - OSHAKE</title>
+
+    <link rel="stylesheet" href="../css/diary.css">
+
+    <style>
+        .post-main {
+
+            width:
+                min(900px, calc(100% - 40px));
+
+            margin:
+                0 auto;
+
+            padding:
+                150px 0 100px;
+
+        }
+
+
+        .post-back {
+
+            display:
+                inline-block;
+
+            margin-bottom:
+                40px;
+
+            color:
+                #ffffff;
+
+            text-decoration:
+                none;
+
+            font-family:
+                "Kaushan Script",
+                cursive;
+
+            font-size:
+                18px;
+
+            opacity:
+                0.7;
+
+            transition:
+                opacity 0.2s ease;
+
+        }
+
+
+        .post-back:hover {
+
+            opacity:
+                1;
+
+        }
+
+
+        .post-title {
+
+            margin:
+                0;
+
+            font-family:
+                "Kaushan Script",
+                cursive;
+
+            font-size:
+                60px;
+
+            line-height:
+                1.2;
+
+        }
+
+
+        .post-date {
+
+            margin-top:
+                15px;
+
+            opacity:
+                0.55;
+
+            font-size:
+                14px;
+
+        }
+
+
+        .post-content {
+
+            margin-top:
+                60px;
+
+            line-height:
+                1.9;
+
+            overflow-wrap:
+                anywhere;
+
+        }
+
+
+        .post-content h1,
+        .post-content h2,
+        .post-content h3 {
+
+            font-family:
+                "Kaushan Script",
+                cursive;
+
+            line-height:
+                1.4;
+
+            margin:
+                45px 0 15px;
+
+        }
+
+
+        .post-content h1 {
+
+            font-size:
+                40px;
+
+        }
+
+
+        .post-content h2 {
+
+            font-size:
+                32px;
+
+        }
+
+
+        .post-content h3 {
+
+            font-size:
+                25px;
+
+        }
+
+
+        .post-content blockquote {
+
+            margin:
+                20px 0;
+
+            padding:
+                12px 20px;
+
+            border-left:
+                3px solid rgba(255, 255, 255, 0.5);
+
+            background:
+                rgba(255, 255, 255, 0.03);
+
+            opacity:
+                0.85;
+
+        }
+
+
+        .post-content code {
+
+            padding:
+                2px 6px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border-radius:
+                3px;
+
+        }
+
+
+        .post-content pre {
+
+            padding:
+                18px;
+
+            overflow-x:
+                auto;
+
+            background:
+                rgba(0, 0, 0, 0.35);
+
+        }
+
+
+        .post-content pre code {
+
+            padding:
+                0;
+
+            background:
+                none;
+
+        }
+
+
+        .post-content img {
+
+            max-width:
+                100%;
+
+            height:
+                auto;
+
+        }
+
+
+        .post-content a {
+
+            color:
+                #ffffff;
+
+        }
+
+
+        .post-actions {
+
+            display:
+                flex;
+
+            gap:
+                12px;
+
+            margin-top:
+                60px;
+
+        }
+
+
+        .post-action {
+
+            padding:
+                10px 20px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.25);
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            color:
+                #ffffff;
+
+            font-family:
+                "Kaushan Script",
+                cursive;
+
+            cursor:
+                pointer;
+
+            text-decoration:
+                none;
+
+        }
+
+
+        .post-action:hover {
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+        }
+
+
+        #post-message {
+
+            margin-top:
+                40px;
+
+            opacity:
+                0.7;
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .post-main {
+
+                width:
+                    calc(100% - 30px);
+
+                padding-top:
+                    120px;
+
+            }
+
+
+            .post-title {
+
+                font-size:
+                    42px;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <canvas id="night-sky"></canvas>
+
+
+    <header class="diary-header">
+
+        <a href="index.html" class="diary-logo">
+            DIARY
+        </a>
+
+    </header>
+
+
+    <main class="post-main">
+
+        <a href="index.html" class="post-back">
+            ← BACK TO DIARY
+        </a>
+
+
+        <h1 id="post-title" class="post-title">
+            Loading...
+        </h1>
+
+
+        <div id="post-date" class="post-date">
+        </div>
+
+
+        <article id="post-content" class="post-content">
+        </article>
+
+
+        <div id="post-actions" class="post-actions" style="display: none;">
+
+            <a id="edit-button" class="post-action" href="#">
+                EDIT
+            </a>
+
+
+            <button id="delete-button" class="post-action" type="button">
+                DELETE
+            </button>
+
+        </div>
+
+
+        <p id="post-message">
+        </p>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+
+    <script src="../js/night-sky.js"></script>
+
+    <script src="../js/diary/markdown.js"></script>
+
+    <script src="../js/diary/post.js"></script>
+
+</body>
+
+</html>
