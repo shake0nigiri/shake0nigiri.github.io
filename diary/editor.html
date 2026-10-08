@@ -9,9 +9,11 @@
 
     <link rel="stylesheet" href="../css/diary.css">
 
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
     <style>
         .editor-main {
-            width: min(1100px, calc(100% - 40px));
+            width: min(1200px, calc(100% - 40px));
             margin: 0 auto;
             padding: 150px 0 100px;
         }
@@ -31,14 +33,10 @@
         }
 
         .editor-title {
-            margin: 0 0 50px;
+            margin: 0 0 45px;
             font-family: "Kaushan Script", cursive;
             font-size: 60px;
             line-height: 1.2;
-        }
-
-        .editor-form {
-            width: 100%;
         }
 
         .editor-field {
@@ -53,34 +51,20 @@
             opacity: 0.8;
         }
 
-        .editor-input,
-        .editor-textarea {
+        .editor-input {
             box-sizing: border-box;
             width: 100%;
+            height: 55px;
+            padding: 0 15px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0;
             background: rgba(255, 255, 255, 0.04);
             color: #fff;
             outline: none;
             font-family: inherit;
-        }
-
-        .editor-input {
-            height: 55px;
-            padding: 0 15px;
             font-size: 18px;
         }
 
-        .editor-textarea {
-            min-height: 450px;
-            padding: 15px;
-            resize: vertical;
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        .editor-input:focus,
-        .editor-textarea:focus {
+        .editor-input:focus {
             border-color: rgba(255, 255, 255, 0.55);
             background: rgba(255, 255, 255, 0.06);
         }
@@ -103,9 +87,89 @@
             opacity: 0.8;
         }
 
+        #editor {
+            min-height: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.035);
+            color: #fff;
+            font-family: inherit;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        #editor .ql-editor {
+            min-height: 500px;
+            padding: 20px;
+        }
+
+        #editor .ql-editor.ql-blank::before {
+            color: rgba(255, 255, 255, 0.35);
+            font-style: normal;
+        }
+
+        .ql-toolbar.ql-snow {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.035);
+        }
+
+        .ql-container.ql-snow {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 0;
+        }
+
+        .ql-snow .ql-stroke {
+            stroke: rgba(255, 255, 255, 0.8);
+        }
+
+        .ql-snow .ql-fill {
+            fill: rgba(255, 255, 255, 0.8);
+        }
+
+        .ql-snow .ql-picker {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .ql-snow .ql-picker-options {
+            background: #181818;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .ql-snow .ql-picker-item {
+            color: #fff;
+        }
+
+        .ql-snow .ql-picker-label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .ql-snow button:hover .ql-stroke,
+        .ql-snow .ql-picker-label:hover .ql-stroke,
+        .ql-snow .ql-picker-item:hover .ql-stroke {
+            stroke: #fff;
+        }
+
+        .ql-snow button:hover .ql-fill,
+        .ql-snow .ql-picker-label:hover .ql-fill,
+        .ql-snow .ql-picker-item:hover .ql-fill {
+            fill: #fff;
+        }
+
+        .ql-snow .ql-tooltip {
+            background: #181818;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: none;
+            color: #fff;
+        }
+
+        .ql-snow .ql-tooltip input[type="text"] {
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
         .markdown-preview {
             box-sizing: border-box;
-            min-height: 450px;
+            min-height: 500px;
             padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.03);
@@ -115,22 +179,37 @@
 
         .markdown-preview h1,
         .markdown-preview h2,
-        .markdown-preview h3 {
+        .markdown-preview h3,
+        .markdown-preview h4,
+        .markdown-preview h5,
+        .markdown-preview h6 {
             font-family: "Kaushan Script", cursive;
             line-height: 1.4;
             margin: 35px 0 15px;
         }
 
         .markdown-preview h1 {
-            font-size: 36px;
+            font-size: 38px;
         }
 
         .markdown-preview h2 {
-            font-size: 30px;
+            font-size: 32px;
         }
 
         .markdown-preview h3 {
-            font-size: 24px;
+            font-size: 27px;
+        }
+
+        .markdown-preview h4 {
+            font-size: 23px;
+        }
+
+        .markdown-preview h5 {
+            font-size: 20px;
+        }
+
+        .markdown-preview h6 {
+            font-size: 18px;
         }
 
         .markdown-preview blockquote {
@@ -141,25 +220,22 @@
             opacity: 0.85;
         }
 
-        .markdown-preview code {
-            padding: 2px 6px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
         .markdown-preview pre {
             padding: 15px;
             overflow-x: auto;
             background: rgba(0, 0, 0, 0.35);
         }
 
-        .markdown-preview pre code {
-            padding: 0;
-            background: none;
+        .markdown-preview code {
+            padding: 2px 6px;
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .markdown-preview img {
+            display: block;
             max-width: 100%;
             height: auto;
+            margin: 15px 0;
         }
 
         .markdown-preview a {
@@ -173,16 +249,16 @@
             margin-top: 25px;
         }
 
-        .editor-options label {
-            cursor: pointer;
-            user-select: none;
-            opacity: 0.8;
-        }
-
         .editor-options input {
             width: 16px;
             height: 16px;
             cursor: pointer;
+        }
+
+        .editor-options label {
+            cursor: pointer;
+            user-select: none;
+            opacity: 0.8;
         }
 
         .editor-buttons {
@@ -218,7 +294,7 @@
             opacity: 0.7;
         }
 
-        @media (max-width: 800px) {
+        @media (max-width: 900px) {
             .editor-main {
                 width: calc(100% - 30px);
                 padding-top: 120px;
@@ -232,7 +308,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .editor-textarea,
+            #editor,
+            #editor .ql-editor,
             .markdown-preview {
                 min-height: 350px;
             }
@@ -263,11 +340,13 @@
         <form id="editor-form" class="editor-form">
 
             <div class="editor-field">
+
                 <label class="editor-label" for="diary-title">
                     TITLE
                 </label>
 
                 <input id="diary-title" class="editor-input" type="text" maxlength="200" autocomplete="off" required>
+
             </div>
 
             <div class="editor-workspace">
@@ -278,8 +357,58 @@
                         CONTENT
                     </div>
 
-                    <textarea id="diary-content" class="editor-textarea" placeholder="Markdownで日記を書いてください。"
-                        spellcheck="false" required></textarea>
+                    <div id="toolbar">
+
+                        <span class="ql-formats">
+                            <select class="ql-header">
+                                <option value="1"></option>
+                                <option value="2"></option>
+                                <option value="3"></option>
+                                <option value="4"></option>
+                                <option value="5"></option>
+                                <option value="6"></option>
+                                <option selected></option>
+                            </select>
+                        </span>
+
+                        <span class="ql-formats">
+                            <button class="ql-bold"></button>
+                            <button class="ql-italic"></button>
+                            <button class="ql-underline"></button>
+                            <button class="ql-strike"></button>
+                        </span>
+
+                        <span class="ql-formats">
+                            <select class="ql-color"></select>
+                            <select class="ql-background"></select>
+                        </span>
+
+                        <span class="ql-formats">
+                            <button class="ql-list" value="ordered"></button>
+
+                            <button class="ql-list" value="bullet"></button>
+
+                            <button class="ql-blockquote"></button>
+
+                            <button class="ql-code-block"></button>
+                        </span>
+
+                        <span class="ql-formats">
+                            <select class="ql-align"></select>
+                        </span>
+
+                        <span class="ql-formats">
+                            <button class="ql-link"></button>
+                            <button class="ql-image"></button>
+                        </span>
+
+                        <span class="ql-formats">
+                            <button class="ql-clean"></button>
+                        </span>
+
+                    </div>
+
+                    <div id="editor"></div>
 
                 </section>
 
@@ -324,6 +453,8 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
