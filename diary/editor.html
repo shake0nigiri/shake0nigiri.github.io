@@ -9,13 +9,16 @@
 
     <link rel="stylesheet" href="../css/diary.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
+        rel="stylesheet"
+    >
 
     <style>
         .editor-main {
             width: min(1200px, calc(100% - 40px));
             margin: 0 auto;
-            padding: 150px 0 100px;
+            padding: 150px 0 120px;
         }
 
         .editor-back {
@@ -39,8 +42,15 @@
             line-height: 1.2;
         }
 
+        .editor-form {
+            display: block;
+            width: 100%;
+        }
+
         .editor-field {
-            margin-bottom: 25px;
+            display: block;
+            width: 100%;
+            margin-bottom: 30px;
         }
 
         .editor-label {
@@ -53,6 +63,7 @@
 
         .editor-input {
             box-sizing: border-box;
+            display: block;
             width: 100%;
             height: 55px;
             padding: 0 15px;
@@ -69,27 +80,58 @@
             background: rgba(255, 255, 255, 0.06);
         }
 
+        /*
+         * =========================
+         * EDITOR WORKSPACE
+         * =========================
+         */
+
         .editor-workspace {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            align-items: start;
             gap: 25px;
+            width: 100%;
             margin-top: 30px;
+            clear: both;
         }
 
         .editor-panel {
+            display: block;
+            position: relative;
             min-width: 0;
+            width: 100%;
         }
 
         .editor-panel-title {
+            display: block;
             margin-bottom: 10px;
             font-family: "Kaushan Script", cursive;
             font-size: 20px;
             opacity: 0.8;
         }
 
+        /*
+         * =========================
+         * QUILL
+         * =========================
+         */
+
+        #toolbar {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
         #editor {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 500px;
             min-height: 500px;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 0;
             background: rgba(255, 255, 255, 0.035);
             color: #fff;
             font-family: inherit;
@@ -98,8 +140,10 @@
         }
 
         #editor .ql-editor {
-            min-height: 500px;
+            height: 498px;
+            min-height: 498px;
             padding: 20px;
+            overflow-y: auto;
         }
 
         #editor .ql-editor.ql-blank::before {
@@ -108,11 +152,18 @@
         }
 
         .ql-toolbar.ql-snow {
+            position: relative;
+            z-index: 3;
+            width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.035);
         }
 
         .ql-container.ql-snow {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 500px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-top: 0;
         }
@@ -159,6 +210,7 @@
             border: 1px solid rgba(255, 255, 255, 0.25);
             box-shadow: none;
             color: #fff;
+            z-index: 20;
         }
 
         .ql-snow .ql-tooltip input[type="text"] {
@@ -167,13 +219,24 @@
             color: #fff;
         }
 
+        /*
+         * =========================
+         * PREVIEW
+         * =========================
+         */
+
         .markdown-preview {
             box-sizing: border-box;
+            display: block;
+            width: 100%;
+            height: 500px;
             min-height: 500px;
             padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.03);
             line-height: 1.9;
+            overflow-x: hidden;
+            overflow-y: auto;
             overflow-wrap: anywhere;
         }
 
@@ -242,16 +305,29 @@
             color: #fff;
         }
 
+        /*
+         * =========================
+         * PUBLISH OPTIONS
+         * =========================
+         */
+
         .editor-options {
+            position: relative;
+            z-index: 5;
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-top: 25px;
+            width: 100%;
+            margin-top: 30px;
+            padding: 0;
+            clear: both;
         }
 
         .editor-options input {
+            flex: 0 0 auto;
             width: 16px;
             height: 16px;
+            margin: 0;
             cursor: pointer;
         }
 
@@ -261,15 +337,30 @@
             opacity: 0.8;
         }
 
+        /*
+         * =========================
+         * BUTTONS
+         * =========================
+         */
+
         .editor-buttons {
+            position: relative;
+            z-index: 5;
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
             gap: 12px;
-            margin-top: 35px;
+            width: 100%;
+            margin-top: 25px;
+            clear: both;
         }
 
         .editor-button {
+            position: relative;
+            z-index: 6;
+            display: block;
             min-width: 150px;
+            height: 54px;
             padding: 12px 22px;
             border: 1px solid rgba(255, 255, 255, 0.25);
             background: rgba(255, 255, 255, 0.04);
@@ -289,12 +380,23 @@
         }
 
         .editor-message {
+            position: relative;
+            z-index: 5;
+            display: block;
             min-height: 24px;
             margin-top: 25px;
             opacity: 0.7;
+            clear: both;
         }
 
+        /*
+         * =========================
+         * MOBILE
+         * =========================
+         */
+
         @media (max-width: 900px) {
+
             .editor-main {
                 width: calc(100% - 30px);
                 padding-top: 120px;
@@ -310,8 +412,15 @@
 
             #editor,
             #editor .ql-editor,
+            .ql-container.ql-snow,
             .markdown-preview {
+                height: 350px;
                 min-height: 350px;
+            }
+
+            #editor .ql-editor {
+                height: 348px;
+                min-height: 348px;
             }
         }
     </style>
@@ -345,7 +454,14 @@
                     TITLE
                 </label>
 
-                <input id="diary-title" class="editor-input" type="text" maxlength="200" autocomplete="off" required>
+                <input
+                    id="diary-title"
+                    class="editor-input"
+                    type="text"
+                    maxlength="200"
+                    autocomplete="off"
+                    required
+                >
 
             </div>
 
@@ -360,6 +476,7 @@
                     <div id="toolbar">
 
                         <span class="ql-formats">
+
                             <select class="ql-header">
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -369,41 +486,59 @@
                                 <option value="6"></option>
                                 <option selected></option>
                             </select>
+
                         </span>
 
                         <span class="ql-formats">
+
                             <button class="ql-bold"></button>
                             <button class="ql-italic"></button>
                             <button class="ql-underline"></button>
                             <button class="ql-strike"></button>
+
                         </span>
 
                         <span class="ql-formats">
+
                             <select class="ql-color"></select>
                             <select class="ql-background"></select>
+
                         </span>
 
                         <span class="ql-formats">
-                            <button class="ql-list" value="ordered"></button>
 
-                            <button class="ql-list" value="bullet"></button>
+                            <button
+                                class="ql-list"
+                                value="ordered"
+                            ></button>
+
+                            <button
+                                class="ql-list"
+                                value="bullet"
+                            ></button>
 
                             <button class="ql-blockquote"></button>
-
                             <button class="ql-code-block"></button>
+
                         </span>
 
                         <span class="ql-formats">
+
                             <select class="ql-align"></select>
+
                         </span>
 
                         <span class="ql-formats">
+
                             <button class="ql-link"></button>
                             <button class="ql-image"></button>
+
                         </span>
 
                         <span class="ql-formats">
+
                             <button class="ql-clean"></button>
+
                         </span>
 
                     </div>
@@ -418,7 +553,10 @@
                         PREVIEW
                     </div>
 
-                    <div id="markdown-preview" class="markdown-preview"></div>
+                    <div
+                        id="markdown-preview"
+                        class="markdown-preview"
+                    ></div>
 
                 </section>
 
@@ -426,7 +564,10 @@
 
             <div class="editor-options">
 
-                <input id="published" type="checkbox">
+                <input
+                    id="published"
+                    type="checkbox"
+                >
 
                 <label for="published">
                     公開する
@@ -436,17 +577,28 @@
 
             <div class="editor-buttons">
 
-                <button id="draft-button" class="editor-button" type="button">
+                <button
+                    id="draft-button"
+                    class="editor-button"
+                    type="button"
+                >
                     SAVE DRAFT
                 </button>
 
-                <button id="save-button" class="editor-button" type="submit">
+                <button
+                    id="save-button"
+                    class="editor-button"
+                    type="submit"
+                >
                     PUBLISH
                 </button>
 
             </div>
 
-            <p id="editor-message" class="editor-message"></p>
+            <p
+                id="editor-message"
+                class="editor-message"
+            ></p>
 
         </form>
 
